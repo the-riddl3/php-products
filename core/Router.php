@@ -1,6 +1,5 @@
 <?php
-include_once 'App.php';
-
+namespace Products\core;
 
 class Router
 {

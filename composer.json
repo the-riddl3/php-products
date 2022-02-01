@@ -1,0 +1,9 @@
+{
+    "name": "dev/products",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Products\\": ""
+        }
+    }
+}

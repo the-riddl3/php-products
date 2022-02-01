@@ -1,6 +1,5 @@
 <?php
-
-include 'IRequest.php';
+namespace Products\core;
 
 class Request implements IRequest
 {

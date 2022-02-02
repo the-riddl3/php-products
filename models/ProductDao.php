@@ -6,21 +6,22 @@ use Products\core\App;
 class ProductDao implements Dao
 {
 
-    public static function get($primary): array
+    public static function get($primary): Product
     {
         $stmt = App::$db->query("SELECT * FROM products where sku = ?",[$primary]);
 
-        $products = [];
+        $product = $stmt->fetch();
 
+        // query for metadata
+        $stmt = App::$db->query("SELECT * FROM products_meta where product_sku = ?",[$primary]);
         $rows = $stmt->fetchAll();
 
+        $meta = [];
         foreach($rows as $row) {
-            // todo meta
-            $product = new Product($row->sku,$row->name,$row->price,[]);
-            $products[] = $product;
+            $meta[$row['meta_name']] = $row['meta_value'];
         }
 
-        return $products;
+        return new Product($product['sku'],$product['name'],$product['price'],$meta);
     }
 
     public static function all(): array
@@ -31,7 +32,16 @@ class ProductDao implements Dao
 
         $rows = $stmt->fetchAll();
         foreach($rows as $row) {
-            $product = new Product($row['sku'],$row['name'],$row['price'],[]);
+            // query for metadata
+            $stmt = App::$db->query("SELECT * FROM products_meta where product_sku = ?",[$row['sku']]);
+            $meta_rows = $stmt->fetchAll();
+
+            $meta = [];
+            foreach($meta_rows as $r) {
+                $meta[$r['meta_name']] = $r['meta_value'];
+            }
+
+            $product = new Product($row['sku'],$row['name'],$row['price'],$meta);
             $products[] = $product;
         }
 
@@ -45,9 +55,13 @@ class ProductDao implements Dao
                 $item->sku,$item->name,$item->price
             ]);
 
+        foreach($item->meta as $key => $value) {
+            App::$db->query("INSERT INTO products_meta(product_sku,meta_name,meta_value) 
+                    VALUES (?,?,?)",[$item->sku,$key,$value]);
+        }
     }
 
-    public static function update($item, array $params): void
+    public static function update($item, array $params)
     {
         // TODO: Implement update() method.
     }

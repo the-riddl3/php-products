@@ -23,10 +23,11 @@ try {
 
     // products metadata table
     $sql = "CREATE TABLE IF NOT EXISTS products_meta (
-                sku varchar(255) PRIMARY KEY,
+                id int AUTO_INCREMENT PRIMARY KEY,
+                product_sku varchar(255),
                 meta_name varchar(255) NOT NULL,
                 meta_value varchar(255) NOT NULL,
-                FOREIGN KEY (sku) REFERENCES products(sku))";
+                FOREIGN KEY (product_sku) REFERENCES products(sku) ON DELETE CASCADE )";
     $conn->exec($sql);
 
     // success message

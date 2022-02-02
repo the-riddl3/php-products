@@ -1,6 +1,8 @@
 {
     "name": "dev/products",
-    "require": {},
+    "require": {
+      "ext-json": "*"
+    },
     "autoload": {
         "psr-4": {
             "Products\\": ""

@@ -8,10 +8,10 @@ use Products\core\App;
 use Products\utils\Bag;
 use Products\utils\Envy;
 
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // load environment variables from .env
-(new Envy(__DIR__ . '/.env'))->load();
+(new Envy(__DIR__ . '/../.env'))->load();
 
 // initialize app with passed config
 App::init([
@@ -54,7 +54,9 @@ App::$router->post('/add-product', function(Request $request) {
     $product->meta = $meta;
 
     // persist product to db
-    $product->save();
+    if(!$product->save()) {
+        Bag::render('/add-product', []);
+    }
 
     Bag::redirect('/');
 });

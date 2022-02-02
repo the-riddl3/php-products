@@ -94,9 +94,9 @@ class Product implements Model
         $this->meta = $meta;
     }
 
-    public function save(): void
+    public function save(): bool
     {
-        ProductDao::save($this);
+        return ProductDao::save($this);
     }
 
     public function delete(): void

@@ -80,4 +80,4 @@ $title = 'add product';
         <a href="/" class="btn btn-danger my-3">Cancel</a>
     </form>
 </div>
-<script src="/public_html/js/add-product.js"></script>
+<script src="/js/add-product.js"></script>

@@ -14,7 +14,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/public_html/css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title><?= $title ?></title>
 </head>
 <body>
@@ -42,6 +42,6 @@
     <?= $content ?>
 </div>
 
-<script src="/public_html/js/main.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

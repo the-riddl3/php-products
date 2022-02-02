@@ -13,7 +13,7 @@ class Bag
         ob_start();
         $content = self::viewContent($template,$variables);
         $title = "products";
-        include_once 'templates/layouts/' . $layout;
+        include_once __DIR__ . '/../templates/layouts/' . $layout;
         return ob_get_clean();
     }
 
@@ -24,7 +24,7 @@ class Bag
         }
 
         ob_start();
-        $content = include 'templates/' . $template;
+        $content = include __DIR__ . '/../templates/' . $template;
         return ob_get_clean();
     }
 
